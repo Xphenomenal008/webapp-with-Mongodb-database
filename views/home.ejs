@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Updated CSS Path -->
+</head>
+<body>
+    <header>
+        <h1>All Chats</h1>
+        <button class="add-chat">
+            <a href="/newchat">+ New Chat</a>
+        </button>
+    </header>
+    <main class="chat-container">
+        <% data.forEach((data) => { %>
+            <div class="chat-bubble">
+                <p class="chat-meta">To: <strong><%= data.to %></strong> | From: <strong><%= data.from %></strong></p>
+                <p class="chat-msg"><%= data.msg %></p>
+                <p class="chat-time">sent: <%= data.created_at.toString().split(" ")[4] %></p>
+                <p class="chat-time"><%= data.created_at.toString().split("").slice(0,4).join(" ") %></p>
+                <% if(data.updated_at) { %>
+                    <p class="chat-time">Edited: <%= data.updated_at.toString().split(" ")[4] %> <%= data.updated_at.toString().split("").slice(0,4).join(" ") %></p>
+                    
+               <% }%>
+                <div class="chat-actions">
+                    <form method="get" action="/edit/<%= data.id %>">
+                        <button class="edit-btn">Edit</button>
+                    </form>
+                    <form class="handleform"  method="post" action="/delete/<%= data.id %>?_method=DELETE">
+                        <button class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    </main>
+    <footer>
+        <p>&copy; 2025 Your Company</p>
+         
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>

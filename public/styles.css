@@ -1,0 +1,105 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e5ddd5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    background-color: #075e54;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-chat {
+    background-color: #25d366;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-chat a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Chat Container */
+.chat-container {
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Chat Bubble */
+.chat-bubble {
+    background-color: #dcf8c6;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 80%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.chat-meta {
+    font-size: 12px;
+    color: #666;
+}
+
+.chat-msg {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.chat-time {
+    font-size: 10px;
+    color: #999;
+    text-align: right;
+}
+
+/* Chat Actions */
+.chat-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.edit-btn, .delete-btn {
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.edit-btn {
+    background-color: #34b7f1;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #ff3b30;
+    color: white;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #075e54;
+    color: white;
+    font-size: 14px;
+}
