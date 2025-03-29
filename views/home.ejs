@@ -3,42 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Updated CSS Path -->
+    <title>Chat App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>All Chats</h1>
-        <button class="add-chat">
-            <a href="/newchat">+ New Chat</a>
-        </button>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1>Chat Application</h1>
+        <nav class="nav">
+            <% if (curruser) { %>
+                <span class="user-greeting">👋 Hello, <%= curruser.username %>!</span>
+                <form method="post" action="/logout">
+                    <button type="submit" class="btn logout">Logout</button>
+                </form>
+            <% } else { %>
+                <a href="/signup" class="btn">Signup</a>
+                <a href="/login" class="btn">Login</a>
+            <% } %>
+        </nav>
     </header>
+
+    <!-- Main Chat Section -->
     <main class="chat-container">
-        <% data.forEach((data) => { %>
-            <div class="chat-bubble">
-                <p class="chat-meta">To: <strong><%= data.to %></strong> | From: <strong><%= data.from %></strong></p>
-                <p class="chat-msg"><%= data.msg %></p>
-                <p class="chat-time">sent: <%= data.created_at.toString().split(" ")[4] %></p>
-                <p class="chat-time"><%= data.created_at.toString().split("").slice(0,4).join(" ") %></p>
-                <% if(data.updated_at) { %>
-                    <p class="chat-time">Edited: <%= data.updated_at.toString().split(" ")[4] %> <%= data.updated_at.toString().split("").slice(0,4).join(" ") %></p>
+        <div class="chat-header">
+            <button class="btn add-chat">
+                <a href="/newchat">+ New Chat</a>
+            </button>
+        </div>
+
+        <% if (data.length === 0) { %>
+            <p class="no-messages">No messages yet. Start a conversation!</p>
+        <% } else { %>
+            <% data.forEach((chat) => { %>
+                <div class="chat-bubble">
+                    <div class="chat-meta">
+                        <span>📨 To: <strong><%= chat.to %></strong></span> |
+                        <span>📨 From: <strong><%= chat.from %></strong></span>
+                    </div>
                     
-               <% }%>
-                <div class="chat-actions">
-                    <form method="get" action="/edit/<%= data.id %>">
-                        <button class="edit-btn">Edit</button>
-                    </form>
-                    <form class="handleform"  method="post" action="/delete/<%= data.id %>?_method=DELETE">
-                        <button class="delete-btn">Delete</button>
-                    </form>
+                    <p class="chat-msg"><%= chat.msg %></p>
+                    
+                    <p class="chat-time">
+                        🕒 Sent: <%= chat.created_at ? chat.created_at.toLocaleString() : "N/A" %>
+                    </p>
+                    
+                    <% if (chat.updated_at) { %>
+                        <p class="chat-time">✏️ Edited: <%= chat.updated_at.toLocaleString() %></p>
+                    <% } %>
+
+                    <p class="chat-owner">👤 Created by: <%= chat.owner ? chat.owner.username : "Unknown" %></p>
+
+                    <div class="chat-actions">
+                        <a href="/edit/<%= chat.id %>" class="btn edit">✏️ Edit</a>
+                        <form method="post" action="/delete/<%= chat.id %>?_method=DELETE">
+                            <button type="submit" class="btn delete">🗑️ Delete</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        <% }) %>
+            <% }) %>
+        <% } %>
     </main>
-    <footer>
-        <p>&copy; 2025 Your Company</p>
-         
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Chat App. All rights reserved.</p>
     </footer>
-    <script src="app.js"></script>
+
 </body>
 </html>

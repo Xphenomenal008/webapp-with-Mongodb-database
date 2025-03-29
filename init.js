@@ -9,42 +9,7 @@ console.log("connected sucessfully")
 })
 
 const messages = [
-    {
-        from: 'john',
-        to: 'doe',
-        msg: 'good morning!',
-        created_at: new Date().toString()
-    },
-    {
-        from: 'alice',
-        to: 'bob',
-        msg: 'how are you?',
-        created_at: new Date().toString()
-    },
-    {
-        from: 'emma',
-        to: 'oliver',
-        msg: 'happy birthday!',
-        created_at: new Date().toString()
-    },
-    {
-        from: 'michael',
-        to: 'sophia',
-        msg: 'see you soon!',
-        created_at: new Date().toString()
-    },
-    {
-        from: 'david',
-        to: 'elena',
-        msg: 'let’s catch up later.',
-        created_at: new Date().toString()
-    },
-    {
-        from: 'lucas',
-        to: 'mia',
-        msg: 'congratulations on your promotion!',
-        created_at: new Date().toString()
-    },
+     
     {
         from: 'ethan',
         to: 'ava',
@@ -71,7 +36,14 @@ const messages = [
     }
 ];
 
-chat.insertMany(messages)
+const chatfunction=async()=>{
+    await chat.deleteMany({});
+    let init= messages.map((data)=>({...data,owner:"67e6f812daa1945647669e85"}));//
+    await chat.insertMany(init)
+  console.log("init sucess!!")
+
+}
+chatfunction()
 
 
 
